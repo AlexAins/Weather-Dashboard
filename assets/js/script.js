@@ -94,21 +94,21 @@ function forecast(calledCity){
                 // Creating Elements for document
                 var futureCard = document.createElement("div");
                 var futureCardBody = document.createElement("div");
-                var futureCardTitle = document.createElement("h4");
+                var futureCardTitle = document.createElement("h6");
                 var futureCardIcon = document.createElement("img");
                 var futureCardFactors = document.createElement("p");
 
                 // Setting attributes for elements
                 futureCard.setAttribute("class", "card bg-secondary");
                 futureCardBody.setAttribute("class", "card-body");
-                futureCardTitle.setAttribute("class", "card-title");
+                futureCardTitle.setAttribute("class", "card-title font-weight-bold");
                 futureCardIcon.setAttribute("class", "card-img");
                 futureCardIcon.setAttribute("src", iconSrc);
                 futureCardIcon.setAttribute("style", "max-width: 50px");
                 futureCardFactors.setAttribute("class", "card-text");
             
                 // Setting Text for elements
-                futureCardTitle.textContent =" (" + futureDate.format("DD/MM/YYYY") + ")";
+                futureCardTitle.textContent =futureDate.format("DD/MM/YYYY");
                 futureCardFactors.innerHTML = `<p> Temp: ${futureTemp}°C </p>
                 <p> Humidity: ${futureHumidity}% </p>
                 <p> Wind: ${futureWind}m/s </p>`;
