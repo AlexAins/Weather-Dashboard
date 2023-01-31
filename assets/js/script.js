@@ -2,7 +2,7 @@
 var submitBtn = document.getElementById("search-button");
 
 // Calling api to get city coordinates
-function trial(){
+function forecast(){
     var calledCity = document.getElementById("search-input").value;
 
     var queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + calledCity + "&appid=e50faf4d6e538fcaace50d01fae799d5";
@@ -70,7 +70,51 @@ function trial(){
         fetch(queryURL3)
         .then(response => response.json())
         .then(function(futureForecast){
-            console.log(futureForecast);
+
+            // Using for loop to get multiple days
+            for(i=7; i<futureForecast.list.length; i+=8){
+
+                // Creating variables for all needed weather elements
+                var futureTemp = futureForecast.list[i].main.temp;
+                var futureHumidity = futureForecast.list[i].main.humidity;
+                var futureWind = futureForecast.list[i].wind.speed;
+                var futureIcon = futureForecast.list[i].weather[0].icon;
+                var iconSrc = "http://openweathermap.org/img/w/" + futureIcon + ".png";
+
+                // Getting current date variable
+                var unixFutureDate = futureForecast.list[i].dt;
+                var futureDate = moment(unixFutureDate, "X");
+
+                // Creating Elements for document
+                var futureEl = document.getElementById("forecast");
+                var futureCard = document.createElement("div");
+                var futureCardBody = document.createElement("div");
+                var futureCardTitle = document.createElement("h4");
+                var futureCardIcon = document.createElement("img");
+                var futureCardFactors = document.createElement("p");
+
+                // Setting attributes for elements
+                futureCard.setAttribute("class", "card");
+                futureCardBody.setAttribute("class", "card-body");
+                futureCardTitle.setAttribute("class", "card-title");
+                futureCardIcon.setAttribute("class", "card-img");
+                futureCardIcon.setAttribute("src", iconSrc);
+                futureCardIcon.setAttribute("style", "max-width: 50px");
+                futureCardFactors.setAttribute("class", "card-text");
+            
+                // Setting Text for elements
+                futureCardTitle.textContent =" (" + futureDate.format("DD/MM/YYYY") + ")";
+                futureCardFactors.innerHTML = `<p> Temp: ${futureTemp}°C </p>
+                <p> Humidity: ${futureHumidity}% </p>
+                <p> Wind: ${futureWind}m/s </p>`;
+
+                // Appending elements
+                futureEl.appendChild(futureCard);
+                futureCard.appendChild(futureCardBody);
+                futureCardBody.appendChild(futureCardTitle);
+                futureCardBody.appendChild(futureCardIcon);
+                futureCardBody.appendChild(futureCardFactors);
+            }
         })
     })
 }
@@ -79,6 +123,6 @@ function trial(){
 submitBtn.addEventListener('click', function(event){
     event.preventDefault();
 
-    trial();
+    forecast();
 });
 
