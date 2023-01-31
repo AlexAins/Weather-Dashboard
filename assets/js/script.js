@@ -31,7 +31,7 @@ function trial(){
             var iconSrc = "http://openweathermap.org/img/w/" + currentIcon + ".png";
 
             // Getting current date variable
-            
+            var currentDate = moment();
 
             // Creating Elements for document
             var currentEl = document.getElementById("today");
@@ -51,7 +51,7 @@ function trial(){
             currentCardFactors.setAttribute("class", "card-text");
             
             // Setting Text for elements
-            currentCardTitle.textContent = cityName ;
+            currentCardTitle.textContent = cityName + " (" + currentDate.format("DD/MM/YYYY") + ")";
             currentCardFactors.innerHTML = `<p> Temp: ${currentTemp}°C </p>
             <p> Humidity: ${currentHumidity}% </p>
             <p> Wind: ${currentWind}m/s </p>`;
