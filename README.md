@@ -22,7 +22,7 @@ Below is a screenshot of the application:
 
 ## Credits
 
-N/A
+Use of the Open Weather Map API - https://openweathermap.org/
 
 ## Deployed Application
 Link to deployed webpage: https://alexains.github.io/Weather-Dashboard/ 
