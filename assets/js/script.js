@@ -1,10 +1,9 @@
 // Variables
 var submitBtn = document.getElementById("search-button");
+var historyEl = document.getElementById("history");
 
 // Calling api to get city coordinates
 function forecast(calledCity){
-    var calledCity = document.getElementById("search-input").value;
-
     var queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + calledCity + "&appid=e50faf4d6e538fcaace50d01fae799d5";
 
     fetch(queryURL)
@@ -137,7 +136,7 @@ function forecast(calledCity){
 }
 
 function historyList(){
-    var historyEl = document.getElementById("history");
+  
     var historyList = JSON.parse(localStorage.getItem("previousCities"));
 
     historyEl.innerHTML = "";
@@ -150,6 +149,7 @@ function historyList(){
             var listEl = document.createElement("button");
             listEl.textContent = historyList[i];
             listEl.setAttribute("class", "list-group-item");
+            listEl.setAttribute("id", historyList[i]);
     
             historyEl.appendChild(listEl);
         }
@@ -165,18 +165,19 @@ submitBtn.addEventListener('click', function(event){
     document.getElementById("today").innerHTML = "";
     document.getElementById("forecast").innerHTML = "";
 
-    forecast();
+    var inputCity = document.getElementById("search-input").value;
+
+    forecast(inputCity);
 
     document.getElementById("search-input").value = "";
 });
 
-var previousButtonEl = document.getElementsByClassName("list-group-item");
+historyEl.addEventListener('click', function(event){
+    var previousSearch =  event.target.getAttribute('id');
 
-previousButtonEl.addEventListener('click', function(event){
-    event.preventDefault();
+    document.getElementById("today").innerHTML = "";
+    document.getElementById("forecast").innerHTML = "";
 
-    var previousCity = this.textContent;
-
-    console.log(previousCity);
-})
+    forecast(previousSearch);
+});
 
