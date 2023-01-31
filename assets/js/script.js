@@ -154,7 +154,7 @@ function historyList(){
 
             var listEl = document.createElement("button");
             listEl.textContent = historyList[i];
-            listEl.setAttribute("class", "list-group-item");
+            listEl.setAttribute("class", "list-group-item btn-light");
             listEl.setAttribute("id", historyList[i]);
     
             historyEl.appendChild(listEl);
