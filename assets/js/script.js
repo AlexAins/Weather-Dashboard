@@ -14,6 +14,7 @@ function forecast(){
         // Getting Lat and Lon values to call second API
         var cityLat = cityAPI[0].lat;
         var cityLon = cityAPI[0].lon;
+        var cityName = cityAPI[0].name;
 
         // Calling api with Lat and Lon variable for Current forecast
         var queryURL2 = "https://api.openweathermap.org/data/2.5/weather?lat=" + cityLat + "&lon=" + cityLon + "&units=metric&appid=e50faf4d6e538fcaace50d01fae799d5";
@@ -23,7 +24,6 @@ function forecast(){
         .then(function(currentForecast){
 
             // Creating variables for all needed weather elements
-            var cityName = cityAPI[0].name;
             var currentTemp = currentForecast.main.temp;
             var currentHumidity = currentForecast.main.humidity;
             var currentWind = currentForecast.wind.speed;
@@ -115,6 +115,12 @@ function forecast(){
                 futureCardBody.appendChild(futureCardIcon);
                 futureCardBody.appendChild(futureCardFactors);
             }
+
+            // Adding search city to local Storage array
+            var searchedCitiesString = localStorage.getItem("cities");
+            var searchedCitiesList = JSON.parse(searchedCitiesString) ?? [];
+            
+            
         })
     })
 }
@@ -127,5 +133,7 @@ submitBtn.addEventListener('click', function(event){
     document.getElementById("forecast").innerHTML = "";
 
     forecast();
+
+    document.getElementById("search-input").value = "";
 });
 
