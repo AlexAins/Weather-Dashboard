@@ -4,7 +4,7 @@ var historyEl = document.getElementById("history");
 
 // Calling api to get city coordinates
 function forecast(calledCity){
-    var queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + calledCity + "&appid=e50faf4d6e538fcaace50d01fae799d5";
+    var queryURL = "https://api.openweathermap.org/geo/1.0/direct?q=" + calledCity + "&appid=e50faf4d6e538fcaace50d01fae799d5";
 
     fetch(queryURL)
     .then(response => response.json())
@@ -27,7 +27,7 @@ function forecast(calledCity){
             var currentHumidity = currentForecast.main.humidity;
             var currentWind = currentForecast.wind.speed;
             var currentIcon = currentForecast.weather[0].icon;
-            var iconSrc = "http://openweathermap.org/img/w/" + currentIcon + ".png";
+            var iconSrc = "https://openweathermap.org/img/w/" + currentIcon + ".png";
 
             // Getting current date variable
             var currentDate = moment();
@@ -64,7 +64,7 @@ function forecast(calledCity){
         })
 
         // Calling api with  Lat and Lon variables for future forecast
-        var queryURL3 = "http://api.openweathermap.org/data/2.5/forecast?lat=" + cityLat + "&lon=" + cityLon + "&units=metric&appid=e50faf4d6e538fcaace50d01fae799d5";
+        var queryURL3 = "https://api.openweathermap.org/data/2.5/forecast?lat=" + cityLat + "&lon=" + cityLon + "&units=metric&appid=e50faf4d6e538fcaace50d01fae799d5";
 
         fetch(queryURL3)
         .then(response => response.json())
@@ -85,7 +85,7 @@ function forecast(calledCity){
                 var futureHumidity = futureForecast.list[i].main.humidity;
                 var futureWind = futureForecast.list[i].wind.speed;
                 var futureIcon = futureForecast.list[i].weather[0].icon;
-                var iconSrc = "http://openweathermap.org/img/w/" + futureIcon + ".png";
+                var iconSrc = "https://openweathermap.org/img/w/" + futureIcon + ".png";
 
                 // Getting current date variable
                 var unixFutureDate = futureForecast.list[i].dt;
