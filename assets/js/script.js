@@ -123,6 +123,9 @@ function forecast(){
 submitBtn.addEventListener('click', function(event){
     event.preventDefault();
 
+    document.getElementById("today").innerHTML = "";
+    document.getElementById("forecast").innerHTML = "";
+
     forecast();
 });
 
