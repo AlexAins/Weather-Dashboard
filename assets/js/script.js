@@ -42,7 +42,7 @@ function forecast(calledCity){
 
             // Setting attributes for elements
             currentCard.setAttribute("class", "card");
-            currentCardBody.setAttribute("class", "card-body");
+            currentCardBody.setAttribute("class", "card-body border-primary ");
             currentCardTitle.setAttribute("class", "card-title");
             currentCardIcon.setAttribute("class", "card-img");
             currentCardIcon.setAttribute("src", iconSrc);
@@ -70,6 +70,13 @@ function forecast(calledCity){
         .then(response => response.json())
         .then(function(futureForecast){
 
+            // Creating are for future forecast
+            var futureEl = document.getElementById("forecast");
+            var futureCardDeck = document.createElement("div");
+
+            futureCardDeck.setAttribute("class","card-deck");
+            futureEl.appendChild(futureCardDeck);
+
             // Using for loop to get multiple days
             for(i=7; i<futureForecast.list.length; i+=8){
 
@@ -85,7 +92,6 @@ function forecast(calledCity){
                 var futureDate = moment(unixFutureDate, "X");
 
                 // Creating Elements for document
-                var futureEl = document.getElementById("forecast");
                 var futureCard = document.createElement("div");
                 var futureCardBody = document.createElement("div");
                 var futureCardTitle = document.createElement("h4");
@@ -93,7 +99,7 @@ function forecast(calledCity){
                 var futureCardFactors = document.createElement("p");
 
                 // Setting attributes for elements
-                futureCard.setAttribute("class", "card");
+                futureCard.setAttribute("class", "card bg-secondary");
                 futureCardBody.setAttribute("class", "card-body");
                 futureCardTitle.setAttribute("class", "card-title");
                 futureCardIcon.setAttribute("class", "card-img");
@@ -108,7 +114,7 @@ function forecast(calledCity){
                 <p> Wind: ${futureWind}m/s </p>`;
 
                 // Appending elements
-                futureEl.appendChild(futureCard);
+                futureCardDeck.appendChild(futureCard);
                 futureCard.appendChild(futureCardBody);
                 futureCardBody.appendChild(futureCardTitle);
                 futureCardBody.appendChild(futureCardIcon);
