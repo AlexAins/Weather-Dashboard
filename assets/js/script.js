@@ -2,7 +2,7 @@
 var submitBtn = document.getElementById("search-button");
 
 // Calling api to get city coordinates
-function forecast(){
+function forecast(calledCity){
     var calledCity = document.getElementById("search-input").value;
 
     var queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=" + calledCity + "&appid=e50faf4d6e538fcaace50d01fae799d5";
@@ -130,10 +130,34 @@ function forecast(){
             }
 
             localStorage.setItem("previousCities", JSON.stringify(searchedCities));
-        })
+
+            historyList();
+        })      
     })
 }
 
+function historyList(){
+    var historyEl = document.getElementById("history");
+    var historyList = JSON.parse(localStorage.getItem("previousCities"));
+
+    historyEl.innerHTML = "";
+
+    // console.log(historyList.length)
+
+    if(historyList !== null){
+        for (i=0; i<historyList.length; i++){
+
+            var listEl = document.createElement("button");
+            listEl.textContent = historyList[i];
+            listEl.setAttribute("class", "list-group-item");
+    
+            historyEl.appendChild(listEl);
+        }
+    }
+}
+
+
+historyList();
 
 submitBtn.addEventListener('click', function(event){
     event.preventDefault();
@@ -144,7 +168,15 @@ submitBtn.addEventListener('click', function(event){
     forecast();
 
     document.getElementById("search-input").value = "";
-
-
 });
+
+var previousButtonEl = document.getElementsByClassName("list-group-item");
+
+previousButtonEl.addEventListener('click', function(event){
+    event.preventDefault();
+
+    var previousCity = this.textContent;
+
+    console.log(previousCity);
+})
 
