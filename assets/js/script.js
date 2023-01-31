@@ -116,11 +116,20 @@ function forecast(){
                 futureCardBody.appendChild(futureCardFactors);
             }
 
-            // Adding search city to local Storage array
-            var searchedCitiesString = localStorage.getItem("cities");
-            var searchedCitiesList = JSON.parse(searchedCitiesString) ?? [];
+            // Saving city to localStorage if new
+            var searchedCities = JSON.parse(localStorage.getItem("previousCities"));
             
-            
+            if (searchedCities == null){
+                searchedCities = [];
+            };
+
+            var newCity = cityName;
+
+            if (searchedCities.includes(newCity) == false){
+                searchedCities.push(newCity);
+            }
+
+            localStorage.setItem("previousCities", JSON.stringify(searchedCities));
         })
     })
 }
@@ -135,5 +144,7 @@ submitBtn.addEventListener('click', function(event){
     forecast();
 
     document.getElementById("search-input").value = "";
+
+
 });
 
